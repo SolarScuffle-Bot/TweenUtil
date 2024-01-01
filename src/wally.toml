@@ -1,9 +1,9 @@
 [package]
-name = "solarscuffle-bot/connectutil"
+name = "solarscuffle-bot/tweenutil"
 version = "1.1.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 
-description = "A lot of helpful utilities for reducing the amount of boilerplate connection code in codebases, making certain tasks like reactive state management a breeze."
+description = "A lot of helpful utilities for reducing the amount of boilerplate tween code in codebases."
 
 [dependencies]
