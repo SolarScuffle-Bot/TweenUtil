@@ -60,7 +60,7 @@ function Module.get(key)
 	return tweens[key]
 end
 
-function Module.newModel(key: Model, info: TweenInfo, goal: { Pivot: CFrame?, [string]: any })
+function Module.newModel(key: Model, info: TweenInfo, goal: { Pivot: CFrame, [string]: any })
 	local cframe = Instance.new 'CFrameValue'
 	cframe.Value = key:GetPivot()
 
