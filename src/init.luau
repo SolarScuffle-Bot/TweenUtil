@@ -53,7 +53,7 @@ Module.new = new
 function Module.newDescendants(key: Instance, info: TweenInfo, goal: { [string]: any }, className: string?)
 	for _, child in key:GetDescendants() do
 		if not className or child:IsA(className) then
-			new(key, info, goal)
+			new(child, info, goal)
 		end
 	end
 end
