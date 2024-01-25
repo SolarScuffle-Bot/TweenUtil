@@ -6,7 +6,7 @@ local Module = {}
 
 local tweens = {}
 
-function Module.cancel(key: Instance)
+local function cancel(key: Instance)
 	local data = tweens[key]
 	if not data then
 		return
@@ -16,8 +16,15 @@ function Module.cancel(key: Instance)
 	data.tween:Destroy()
 	tweens[key] = nil
 end
+Module.cancel = cancel
 
-function Module.new(key: Instance, info: TweenInfo, goal: { [string]: any })
+function Module.cancelDescendants(key: Instance, className: string?)
+	for _, child in key:GetDescendants() do
+		cancel(child)
+	end
+end
+
+local function new(key: Instance, info: TweenInfo, goal: { [string]: any })
 	Module.cancel(key)
 
 	local tween: Tween = TweenService:Create(key, info, goal)
@@ -39,12 +46,21 @@ function Module.new(key: Instance, info: TweenInfo, goal: { [string]: any })
 
 	return data
 end
+Module.new = new
+
+function Module.newDescendants(key: Instance, info: TweenInfo, goal: { [string]: any }, className: string?)
+	for _, child in key:GetDescendants() do
+		if className and child:IsA(className) then
+			new(key, info, goal)
+		end
+	end
+end
 
 function Module.get(key)
 	return tweens[key]
 end
 
-function Module.newModel(key: Model, info: TweenInfo, goal: { Pivot: CFrame, [string]: any })
+function Module.newModel(key: Model, info: TweenInfo, goal: { Pivot: CFrame?, [string]: any })
 	local cframe = Instance.new 'CFrameValue'
 	cframe.Value = key:GetPivot()
 
