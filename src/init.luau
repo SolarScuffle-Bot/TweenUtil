@@ -27,12 +27,12 @@ function Module.cancelDescendants(key: Instance, className: string?)
 end
 
 local function new(key: Instance, info: TweenInfo, goal: { [string]: any })
-	Module.cancel(key)
+	cancel(key)
 
 	local tween: Tween = TweenService:Create(key, info, goal)
 
 	tween.Completed:Connect(function(playbackState)
-		Module.cancel(key)
+		cancel(key)
 	end)
 
 	local data = {
