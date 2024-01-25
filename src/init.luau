@@ -20,7 +20,9 @@ Module.cancel = cancel
 
 function Module.cancelDescendants(key: Instance, className: string?)
 	for _, child in key:GetDescendants() do
-		cancel(child)
+		if not className or child:IsA(className) then
+			cancel(child)
+		end
 	end
 end
 
@@ -50,7 +52,7 @@ Module.new = new
 
 function Module.newDescendants(key: Instance, info: TweenInfo, goal: { [string]: any }, className: string?)
 	for _, child in key:GetDescendants() do
-		if className and child:IsA(className) then
+		if not className or child:IsA(className) then
 			new(key, info, goal)
 		end
 	end
