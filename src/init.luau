@@ -74,7 +74,7 @@ function Module.newModel(key: Model, info: TweenInfo, goal: { Pivot: CFrame, [st
 	newGoal.Value = goal.Pivot
 	newGoal.Pivot = nil
 
-	return Module.new(cframe, info, newGoal), c
+	return new(cframe, info, newGoal), c
 end
 
 return Module
